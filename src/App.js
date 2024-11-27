@@ -4,6 +4,7 @@ import Features from "./components/Features";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
 
         {/* <Footer /> */}

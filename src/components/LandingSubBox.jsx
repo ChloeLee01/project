@@ -12,7 +12,7 @@ import "swiper/css";
 import { useRef } from "react";
 
 
-export default () => {
+const LandingSubBox = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   console.log(prevRef.current);
@@ -58,5 +58,5 @@ export default () => {
   );
 };
 
-
+export default LandingSubBox;
 
