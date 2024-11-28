@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchPostAuthData } from "../redux/slices/authSlice";
+
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigator = useNavigate();
+  
   const [value, setValue] = useState({
     username: "",
     email: "",
@@ -16,19 +22,41 @@ const Register = () => {
   };
   // console.log(value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (value.username === "" || value.email === "" || value.password === "") {
       alert("이름과 이메일, 비밀번호는 필수 입력값입니다.");
     }
 
-    console.log("입력완료");
+    // const formData = new FormData();
+    // formData.append("username", value.username);
+    // formData.append("email", value.email);
+    // formData.append("password", value.password);
+
+    // console.log(formData);
+
+    try {
+      const response = await dispatch(fetchPostAuthData(value)).unwrap();
+      // console.log(response);
+      if (response.status === 201) {
+        alert(response.data.msg);
+        navigator("/login")
+        return;
+      }
+
+      if(response.data.success === false) {
+        alert(response.data.msg);
+        return;
+      }
+    } catch (error) {
+      alert(error.msg);
+    }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="shadow-lg px-8 py-5 w-[20%]">
+      <div className="shadow-lg px-8 py-5 w-[20%] border">
         <h2 className="text-lg font-bold mb-4">SIGNUP</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
