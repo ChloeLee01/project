@@ -5,6 +5,7 @@ import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Management from "./components/Management";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/management" element={<Management />} />
         </Routes>
 
         {/* <Footer /> */}

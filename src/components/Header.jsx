@@ -2,9 +2,19 @@ import React from "react";
 import { navItems } from "./../constants/data";
 import { Link } from "react-router-dom";
 import profile from "./../assets/profile.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { clearToken } from "../redux/slices/loginSlice";
 
 const Header = () => {
-  const isLoggedIn = false;
+  
+  const user = useSelector((state) => state.login.user);
+  console.log(user);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(clearToken());
+  };
   return (
     <div className="w-full  shadow-custom py-4">
       <div className="container flex justify-between items-center">
@@ -22,7 +32,7 @@ const Header = () => {
         </div>
         <div className="info">
           <ul className="flex gap-4 items-center">
-            {isLoggedIn ? (
+            {user !== null ? (
               <>
                 <li>
                   <img
@@ -31,10 +41,10 @@ const Header = () => {
                     className="w-7 h-7 rounded-full overflow-hidden"
                   />
                 </li>
-                <li>Chloe님</li>
+                <li>{user.username}님</li>
 
                 <li>
-                  <button className="btn">로그아웃</button>
+                  <button className="btn" onClick={handleLogout}>로그아웃</button>
                 </li>
               </>
             ) : (

@@ -12,6 +12,7 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
+    profile_img: "",
   });
 
   const handleChange = (e) => {
@@ -95,6 +96,7 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
+          <input type="file" />
           <button className="btn w-full">Submit</button>
         </form>
         <div className="mt-4">
