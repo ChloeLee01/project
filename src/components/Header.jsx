@@ -1,7 +1,6 @@
 import React from "react";
 import { navItems } from "./../constants/data";
 import { Link } from "react-router-dom";
-import profile from "./../assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { clearToken } from "../redux/slices/loginSlice";
 
@@ -36,7 +35,7 @@ const Header = () => {
               <>
                 <li>
                   <img
-                    src={profile}
+                    src={user.profile_img}
                     alt=""
                     className="w-7 h-7 rounded-full overflow-hidden"
                   />

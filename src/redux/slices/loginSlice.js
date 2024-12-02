@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"; //로컬에 요청하는 부분이여서 비동기 요청이 필요없음
-import { jwtDecode } from "../utils/jwtDecode";
+import { jwtDecode } from "../utils/jwtDecode"; //jwt 복호화 함수
 
 const initialToken = localStorage.getItem("token");
 
 const initialState = {
   token: initialToken || null,
-  user: null,
+  user: initialToken ? jwtDecode(initialToken) : null,
 };
 
 const loginSlice = createSlice({
@@ -15,6 +15,8 @@ const loginSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload; //action.payload : action으로 전달받은 결과값
       state.user = jwtDecode(action.payload);
+      localStorage.setItem("token", action.payload);
+
     },
     clearToken: (state) => {
       state.token = null;

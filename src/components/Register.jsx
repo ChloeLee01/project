@@ -15,6 +15,8 @@ const Register = () => {
     profile_img: "",
   });
 
+  const [file, setFile] = useState(null);
+
   const handleChange = (e) => {
     setValue({
       ...value,
@@ -23,6 +25,10 @@ const Register = () => {
   };
   // console.log(value);
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]); // 파일 객체 저장 files[0] = 파일 경로
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,15 +36,19 @@ const Register = () => {
       alert("이름과 이메일, 비밀번호는 필수 입력값입니다.");
     }
 
-    // const formData = new FormData();
-    // formData.append("username", value.username);
-    // formData.append("email", value.email);
-    // formData.append("password", value.password);
+    const formData = new FormData();
+    formData.append("username", value.username);
+    formData.append("email", value.email);
+    formData.append("password", value.password);
+
+    if(file) {
+      formData.append("profile_img", file);
+    }
 
     // console.log(formData);
 
     try {
-      const response = await dispatch(fetchPostAuthData(value)).unwrap();
+      const response = await dispatch(fetchPostAuthData(formData)).unwrap();
       // console.log(response);
       if (response.status === 201) {
         alert(response.data.msg);
@@ -96,7 +106,7 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          <input type="file" />
+          <input type="file" name="profile_img" onChange={handleFileChange}/>
           <button className="btn w-full">Submit</button>
         </form>
         <div className="mt-4">

@@ -40,7 +40,7 @@ const Login = () => {
       // console.log(response);
       if (response.status === 201) {
         alert(response.data.msg);
-        localStorage.setItem("token", response.data.token); // 로컬스토리지에 저장 - localStorage.setItem("저장할 이름", "저장할 값")
+        // localStorage.setItem("token", response.data.token); // 로컬스토리지에 저장 - localStorage.setItem("저장할 이름", "저장할 값")
         // localStorage.getItem("저장된 이름(key)") :저장된 이름의 값을 가져올 수 있음
         // localStorage.removeItem("저장된 이름(key)") :저장된 이름의 값을 삭제할 수 있음
         dispatch(setToken(response.data.token));

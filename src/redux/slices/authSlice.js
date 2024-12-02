@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { POST_AUTH_API_URL , POST_LOGIN_API_URL } from "../utils/apiUrl";
-import { postRequest } from "../utils/requestMethods";
+import { postFormRequest, postRequest } from "../utils/requestMethods";
 
 // post thunk function 정의
 const postAuthFetchThunk = (actionType, apiURL) => {
@@ -8,11 +8,11 @@ const postAuthFetchThunk = (actionType, apiURL) => {
     // console.log(postData);
     try {
       const options = {
-        body: JSON.stringify(postData), // 표준 JSON 문자열로 변환 json 형식일 때
-        // method: "POST",
-        // body: postData, // json 형식이 아닐 때
+        // body: JSON.stringify(postData), // 표준 JSON 문자열로 변환 json 형식일 때
+        method: "POST",
+        body: postData, // json 형식이 아닐 때
       };
-      const response = await postRequest(apiURL, options);
+      const response = await postFormRequest(apiURL, options);
       return response; // { status, data } 형태로 반환
     } catch (error) {
       // 에러 시 상태 코드와 메시지를 포함한 값을 rejectWithValue로 전달
